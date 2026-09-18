@@ -41,8 +41,8 @@ OutFile "${OUTDIR}\${OUTBASE}.exe"
 InstallDir "$LOCALAPPDATA\AliBahmani\IronOreProcessSimulator"
 InstallDirRegKey HKCU "${REGKEY}" "InstallDir"
 RequestExecutionLevel user
-SetCompressor /SOLID lzma
-SetCompressorDictSize 64
+SetCompressor lzma
+SetCompressorDictSize 32
 XPStyle on
 ShowInstDetails show
 BrandingText "${APPNAME} v${APPVERSION}  -  ${PUBLISHER}  -  ${CONTACT}"
