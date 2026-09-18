@@ -31,16 +31,16 @@ jobs:
           python -m pip download --only-binary=:all: --platform win_amd64 --python-version "$PYTAG" --implementation cp \
             --dest "$BUILD/wheels" openpyxl ezdxf reportlab pillow numpy imageio imageio-ffmpeg PySide6-Essentials shiboken6 pytest
           ls -1 "$BUILD/wheels"
-          echo "== 3/5 Pruning PySide6 QML build artifacts (compiler leftovers, not runtime files) to avoid NSIS long-path failures =="
-          find "$SITE" -type d \( -name 'objects-Debug' -o -name 'objects-Release' \) -exec rm -rf {} + 2>/dev/null || true
-          find "$SITE" -type f -name '*.obj' -delete 2>/dev/null || true
-          echo "== 3/5 Enabling site-packages in the embeddable runtime ==""
+          echo "== 3/5 Enabling site-packages in the embeddable runtime =="
           printf 'python%s.zip\r\n.\r\nLib\\site-packages\r\nimport site\r\n' "$PYTAG" > "$PAYLOAD/runtime/python/python${PYTAG}._pth"
           SITE="$PAYLOAD/runtime/python/Lib/site-packages"
           mkdir -p "$SITE"
           for w in "$BUILD"/wheels/*.whl; do
             python -c "import zipfile,sys; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])" "$w" "$SITE"
           done
+          echo "== Pruning PySide6 QML compiler leftovers (objects-Debug, *.obj) to avoid NSIS long-path failure =="
+          find "$SITE" -type d \( -name 'objects-Debug' -o -name 'objects-Release' \) -exec rm -rf {} + 2>/dev/null || true
+          find "$SITE" -type f -name '*.obj' -delete 2>/dev/null || true
           echo "== 4/5 Copying unmodified application sources =="
           cp -r ahsim ahsim_app.py docs tests scripts RELEASE README.md LICENSE "$PAYLOAD/app/"
           mkdir -p "$PAYLOAD/app/installer"
