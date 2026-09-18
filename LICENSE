@@ -1,0 +1,50 @@
+Copyright (c) 2026 Ali Bahmani (علی بهمنی). All rights reserved.
+Contact: 09915420558
+
+AliBahmani IronOre Process Simulator (AH-SIM)
+Industrial Mineral Processing Simulation and Engineering Software
+
+PROPRIETARY LICENSE - TERMS OF USE
+
+1. OWNERSHIP
+   The software, its source code, models, documentation, engineering data and
+   all accompanying files (the "Software") are the exclusive property of
+   Ali Bahmani (the "Author").
+
+2. GRANT
+   The Author grants you a non-exclusive, non-transferable licence to install
+   and use the Software on computers that you own or control, for the purpose
+   of process simulation, engineering study and internal reporting.
+
+3. RESTRICTIONS
+   You may not: (a) redistribute, sublicense, sell, rent, lease or publish the
+   Software or any derivative of it; (b) remove or alter any authorship,
+   copyright or contact notice; (c) use the Software to produce a competing
+   product; (d) claim authorship of the Software or of its underlying models.
+   Any modification made for internal use remains subject to this licence.
+
+4. ENGINEERING DISCLAIMER
+   The Software is an engineering calculation aid. Its models require
+   calibration against measured plant data (see docs/CALIBRATION_MANUAL.md)
+   before results are used for design, procurement, contractual guarantees or
+   safety-related decisions. Simulation results are estimates and are provided
+   without warranty of any kind. The Author is not liable for any loss, damage
+   or claim arising from the use of, or reliance upon, the Software or its
+   outputs.
+
+5. NO WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
+
+6. LIMITATION OF LIABILITY
+   IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY INDIRECT, INCIDENTAL,
+   SPECIAL, EXEMPLARY OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OF OR
+   INABILITY TO USE THE SOFTWARE.
+
+7. SUPPORT AND CONTACT
+   Support, calibration services and licensing enquiries:
+   Ali Bahmani - telephone 09915420558.
+
+For any use not expressly granted above, prior written permission of the Author
+is required.

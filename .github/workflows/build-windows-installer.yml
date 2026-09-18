@@ -1,0 +1,107 @@
+name: Build and Test Windows Installer
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-install-test:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    env:
+      PYVER: 3.11.9
+      PYTAG: 311
+    steps:
+      - name: Checkout (unmodified project sources)
+        uses: actions/checkout@v4
+
+      - name: Assemble self-contained payload (CPython 3.11 x64 + win_amd64 wheels)
+        shell: bash
+        run: |
+          set -e
+          BUILD="$GITHUB_WORKSPACE/_build"
+          PAYLOAD="$BUILD/payload"
+          mkdir -p "$BUILD/wheels" "$PAYLOAD/runtime" "$PAYLOAD/app" "$PAYLOAD/bin"
+          echo "== 1/5 Windows embeddable CPython $PYVER (amd64) =="
+          curl -fsSL -o "$BUILD/python-embed.zip" "https://www.python.org/ftp/python/${PYVER}/python-${PYVER}-embed-amd64.zip"
+          python -c "import zipfile; zipfile.ZipFile(r'$BUILD/python-embed.zip').extractall(r'$PAYLOAD/runtime/python')"
+          test -f "$PAYLOAD/runtime/python/python.exe"
+          echo "== 2/5 Resolving win_amd64 / cp$PYTAG binary wheels =="
+          python -m pip download --only-binary=:all: --platform win_amd64 --python-version "$PYTAG" --implementation cp \
+            --dest "$BUILD/wheels" openpyxl ezdxf reportlab pillow numpy imageio imageio-ffmpeg PySide6-Essentials shiboken6 pytest
+          ls -1 "$BUILD/wheels"
+          echo "== 3/5 Enabling site-packages in the embeddable runtime =="
+          printf 'python%s.zip\r\n.\r\nLib\\site-packages\r\nimport site\r\n' "$PYTAG" > "$PAYLOAD/runtime/python/python${PYTAG}._pth"
+          SITE="$PAYLOAD/runtime/python/Lib/site-packages"
+          mkdir -p "$SITE"
+          for w in "$BUILD"/wheels/*.whl; do
+            python -c "import zipfile,sys; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])" "$w" "$SITE"
+          done
+          echo "== 4/5 Copying unmodified application sources =="
+          cp -r ahsim ahsim_app.py docs tests scripts RELEASE README.md LICENSE "$PAYLOAD/app/"
+          mkdir -p "$PAYLOAD/app/installer"
+          cp -r installer/. "$PAYLOAD/app/installer/"
+          cp installer/cross_build/selfcheck.py "$PAYLOAD/bin/"
+          cp installer/cross_build/Run_AH-SIM.cmd installer/cross_build/Generate_Reports.cmd "$PAYLOAD/app/"
+          find "$PAYLOAD" -name '__pycache__' -type d -prune -exec rm -rf {} + 2>/dev/null || true
+          echo "== 5/5 Payload ready =="
+          du -sh "$PAYLOAD"
+
+      - name: Install NSIS
+        shell: pwsh
+        run: choco install nsis -y --no-progress
+
+      - name: Compile Windows installer (makensis, original NSIS script unchanged)
+        shell: bash
+        run: |
+          set -e
+          NSIS="/c/Program Files (x86)/NSIS/makensis.exe"
+          "$NSIS" -V4 \
+            -DPAYLOAD="$(cygpath -w "$GITHUB_WORKSPACE/_build/payload")" \
+            -DOUTDIR="$(cygpath -w "$GITHUB_WORKSPACE/_build/out")" \
+            installer/AH-SIM_SelfContained_Setup.nsi
+          ls -lh _build/out
+
+      - name: Install silently on this Windows runner (/S) and verify files
+        shell: pwsh
+        run: |
+          $exe = Get-ChildItem "_build/out/*.exe" | Select-Object -First 1
+          Write-Host "Installer: $($exe.FullName)  Size: $([math]::Round($exe.Length/1MB,1)) MB"
+          $p = Start-Process -FilePath $exe.FullName -ArgumentList "/S" -Wait -PassThru
+          Write-Host "Silent installer exit code: $($p.ExitCode)"
+          if ($p.ExitCode -ne 0) { throw "Installer failed with exit code $($p.ExitCode)" }
+          $inst = Join-Path $env:LOCALAPPDATA "AliBahmani\IronOreProcessSimulator"
+          foreach ($rel in @("runtime\python\python.exe","runtime\python\pythonw.exe","app\ahsim_app.py","bin\selfcheck.py","SELF_TEST_LOG.txt")) {
+            if (-not (Test-Path (Join-Path $inst $rel))) { throw "Missing after install: $rel" }
+          }
+          Write-Host "All required files present in $inst"
+          Write-Host "----- SELF_TEST_LOG.txt (written by the installer on this machine) -----"
+          Get-Content (Join-Path $inst "SELF_TEST_LOG.txt") | ForEach-Object { Write-Host $_ }
+
+      - name: Run engineering test suite with the installed private runtime
+        shell: pwsh
+        run: |
+          $inst = Join-Path $env:LOCALAPPDATA "AliBahmani\IronOreProcessSimulator"
+          $py = Join-Path $inst "runtime\python\python.exe"
+          & $py -X utf8 -m pytest (Join-Path $inst "app\tests") -v
+          if ($LASTEXITCODE -ne 0) { throw "pytest failed" }
+
+      - name: Launch the installed application (process must stay alive)
+        shell: pwsh
+        run: |
+          $inst = Join-Path $env:LOCALAPPDATA "AliBahmani\IronOreProcessSimulator"
+          $pyw = Join-Path $inst "runtime\python\pythonw.exe"
+          $env:QT_QPA_PLATFORM = "offscreen"
+          $gui = Start-Process -FilePath $pyw -ArgumentList "`"$inst\app\ahsim_app.py`"" -PassThru
+          Start-Sleep -Seconds 30
+          if ($gui.HasExited) { throw "Application exited immediately (code $($gui.ExitCode)) - launch test FAILED" }
+          Write-Host "Application launch test PASSED - process alive (PID $($gui.Id))"
+          Stop-Process -Id $gui.Id -Force
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AliBahmani_IronOre_Process_Simulator_Setup_v1.0.0
+          path: _build/out/*.exe
+          if-no-files-found: error

@@ -1,0 +1,348 @@
+{
+  "scenarios": [
+    {
+      "simulation_id": "9630230A",
+      "timestamp": "2026-09-18T01:41:46Z",
+      "status": "CONVERGED",
+      "solver_status": "CONVERGED",
+      "iterations": 42,
+      "input_hash": "c5465b42f5f19e47",
+      "result_hash": "b0e3377a540a92d3",
+      "feed_t_h": 100.0,
+      "product_t_h": 1.096168660057266,
+      "tail_t_h": 98.9034325722944,
+      "product_fe_pct": 60.076795519533626,
+      "tail_fe_pct": 18.039086434056934,
+      "mass_recovery_pct": 1.096168660057266,
+      "fe_recovery_pct": 3.5596919159557587,
+      "fe_in_t_h": 18.5,
+      "fe_product_t_h": 0.6585430044518154,
+      "fe_tail_t_h": 17.841275687965407,
+      "circulating_load_t_h": 16.10773779764832,
+      "circulating_load_pct": 16.10773779764832,
+      "screen_load_t_h": 24.877620325027024,
+      "crusher_load_t_h": 16.10773779764832,
+      "separator_load_t_h": [
+        16.666666666666664,
+        16.666666666666664,
+        16.666666666666664,
+        16.666666666666664,
+        16.666666666666664,
+        16.666666666666664
+      ],
+      "final_separator_load_t_h": [
+        4.38494126368935,
+        4.38494126368935
+      ],
+      "production_t_day": 21.92337320114532,
+      "production_t_month": 570.0077032297784,
+      "production_t_year": 7234.713156377956,
+      "mass_balance_error_pct": 0.00039876764833479683,
+      "fe_balance_error_pct": 0.0009800409879910542,
+      "warnings": [
+        "Separator capacity = CALIBRATION REQUIRED (no manufacturer/test data)",
+        "GYRATORY capacity = CALIBRATION REQUIRED (no manufacturer data)"
+      ],
+      "scenario_id": "Scenario-001"
+    },
+    {
+      "simulation_id": "A2D776AE",
+      "timestamp": "2026-09-18T01:41:47Z",
+      "status": "CONVERGED",
+      "solver_status": "CONVERGED",
+      "iterations": 42,
+      "input_hash": "823e98de82f22bdb",
+      "result_hash": "4c16bb7d7ebe12aa",
+      "feed_t_h": 200.0,
+      "product_t_h": 2.192337320114532,
+      "tail_t_h": 197.8068651445888,
+      "product_fe_pct": 60.076795519533626,
+      "tail_fe_pct": 18.039086434056934,
+      "mass_recovery_pct": 1.096168660057266,
+      "fe_recovery_pct": 3.5596919159557587,
+      "fe_in_t_h": 37.0,
+      "fe_product_t_h": 1.3170860089036307,
+      "fe_tail_t_h": 35.682551375930814,
+      "circulating_load_t_h": 32.21547559529664,
+      "circulating_load_pct": 16.10773779764832,
+      "screen_load_t_h": 49.75524065005405,
+      "crusher_load_t_h": 32.21547559529664,
+      "separator_load_t_h": [
+        33.33333333333333,
+        33.33333333333333,
+        33.33333333333333,
+        33.33333333333333,
+        33.33333333333333,
+        33.33333333333333
+      ],
+      "final_separator_load_t_h": [
+        8.7698825273787,
+        8.7698825273787
+      ],
+      "production_t_day": 43.84674640229064,
+      "production_t_month": 1140.0154064595567,
+      "production_t_year": 14469.426312755912,
+      "mass_balance_error_pct": 0.00039876764833479683,
+      "fe_balance_error_pct": 0.0009800409879910542,
+      "warnings": [
+        "Separator capacity = CALIBRATION REQUIRED (no manufacturer/test data)",
+        "GYRATORY capacity = CALIBRATION REQUIRED (no manufacturer data)"
+      ],
+      "scenario_id": "Scenario-002"
+    },
+    {
+      "simulation_id": "ED58DDDA",
+      "timestamp": "2026-09-18T01:41:47Z",
+      "status": "CONVERGED",
+      "solver_status": "CONVERGED",
+      "iterations": 43,
+      "input_hash": "df2e18305c091318",
+      "result_hash": "44350394a64425d3",
+      "feed_t_h": 400.0,
+      "product_t_h": 4.384718846064525,
+      "tail_t_h": 395.61401570770505,
+      "product_fe_pct": 60.07681826965904,
+      "tail_fe_pct": 18.03910433712164,
+      "mass_recovery_pct": 1.0961797115161314,
+      "fe_recovery_pct": 3.5597291524130754,
+      "fe_in_t_h": 74.0,
+      "fe_product_t_h": 2.634199572785676,
+      "fe_tail_t_h": 71.3652250657897,
+      "circulating_load_t_h": 64.4314190962304,
+      "circulating_load_pct": 16.1078547740576,
+      "screen_load_t_h": 99.5112788301081,
+      "crusher_load_t_h": 64.4314190962304,
+      "separator_load_t_h": [
+        66.66666666666666,
+        66.66666666666666,
+        66.66666666666666,
+        66.66666666666666,
+        66.66666666666666,
+        66.66666666666666
+      ],
+      "final_separator_load_t_h": [
+        17.53992986693885,
+        17.53992986693885
+      ],
+      "production_t_day": 87.69437692129051,
+      "production_t_month": 2280.053799953553,
+      "production_t_year": 28939.14438402587,
+      "mass_balance_error_pct": 0.00031636155760850215,
+      "fe_balance_error_pct": 0.0007775154386798795,
+      "warnings": [
+        "Separator capacity = CALIBRATION REQUIRED (no manufacturer/test data)",
+        "GYRATORY capacity = CALIBRATION REQUIRED (no manufacturer data)"
+      ],
+      "scenario_id": "Scenario-003"
+    },
+    {
+      "simulation_id": "FEBDBA41",
+      "timestamp": "2026-09-18T01:41:47Z",
+      "status": "CONVERGED",
+      "solver_status": "CONVERGED",
+      "iterations": 44,
+      "input_hash": "4fe601c63b8d08ba",
+      "result_hash": "25a0929d8e22651c",
+      "feed_t_h": 600.0,
+      "product_t_h": 6.577130876113155,
+      "tail_t_h": 593.4213632175766,
+      "product_fe_pct": 60.076836322562485,
+      "tail_fe_pct": 18.039118541126168,
+      "mass_recovery_pct": 1.0961884793521925,
+      "fe_recovery_pct": 3.5597586947416398,
+      "fe_in_t_h": 111.0,
+      "fe_product_t_h": 3.95133215116322,
+      "fe_tail_t_h": 107.04798315918553,
+      "circulating_load_t_h": 96.64768546631021,
+      "circulating_load_pct": 16.107947577718367,
+      "screen_load_t_h": 149.26786733016215,
+      "crusher_load_t_h": 96.64768546631021,
+      "separator_load_t_h": [
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ],
+      "final_separator_load_t_h": [
+        26.310090931925963,
+        26.310090931925963
+      ],
+      "production_t_day": 131.5426175222631,
+      "production_t_month": 3420.108055578841,
+      "production_t_year": 43409.06378234682,
+      "mass_balance_error_pct": 0.0002509843850286112,
+      "fe_balance_error_pct": 0.0006168375236498619,
+      "warnings": [
+        "Separator capacity = CALIBRATION REQUIRED (no manufacturer/test data)",
+        "GYRATORY capacity = CALIBRATION REQUIRED (no manufacturer data)"
+      ],
+      "scenario_id": "Scenario-004"
+    },
+    {
+      "simulation_id": "59BCDC6D",
+      "timestamp": "2026-09-18T01:41:47Z",
+      "status": "CONVERGED",
+      "solver_status": "CONVERGED",
+      "iterations": 46,
+      "input_hash": "c47d9b40ee4d4eb3",
+      "result_hash": "d21445fbadd3316f",
+      "feed_t_h": 800.0,
+      "product_t_h": 8.769607628418248,
+      "tail_t_h": 791.2291286149684,
+      "product_fe_pct": 60.0768620008302,
+      "tail_fe_pct": 18.039138748966,
+      "mass_recovery_pct": 1.096200953552281,
+      "fe_recovery_pct": 3.5598007249588575,
+      "fe_in_t_h": 148.0,
+      "fe_product_t_h": 5.268505072939108,
+      "fe_tail_t_h": 142.7309203330888,
+      "circulating_load_t_h": 128.86463690661319,
+      "circulating_load_pct": 16.108079613326648,
+      "screen_load_t_h": 199.0256235102162,
+      "crusher_load_t_h": 128.86463690661319,
+      "separator_load_t_h": [
+        133.33333333333331,
+        133.33333333333331,
+        133.33333333333331,
+        133.33333333333331,
+        133.33333333333331,
+        133.33333333333331
+      ],
+      "final_separator_load_t_h": [
+        35.080493301801496,
+        35.080493301801496
+      ],
+      "production_t_day": 175.39215256836496,
+      "production_t_month": 4560.195966777489,
+      "production_t_year": 57879.410347560435,
+      "mass_balance_error_pct": 0.00015796957666225353,
+      "fe_balance_error_pct": 0.0003882391703308025,
+      "warnings": [
+        "Separator capacity = CALIBRATION REQUIRED (no manufacturer/test data)",
+        "GYRATORY capacity = CALIBRATION REQUIRED (no manufacturer data)"
+      ],
+      "scenario_id": "Scenario-005"
+    },
+    {
+      "simulation_id": "B5E15592",
+      "timestamp": "2026-09-18T01:41:47Z",
+      "status": "CONVERGED",
+      "solver_status": "CONVERGED",
+      "iterations": 46,
+      "input_hash": "b74d3eb5e6c8ac9c",
+      "result_hash": "d614bc869350e174",
+      "feed_t_h": 1000.0,
+      "product_t_h": 10.962009535650749,
+      "tail_t_h": 989.0364107696163,
+      "product_fe_pct": 60.07686200082052,
+      "tail_fe_pct": 18.039138748983508,
+      "mass_recovery_pct": 1.096200953565075,
+      "fe_recovery_pct": 3.559800724999831,
+      "fe_in_t_h": 185.0,
+      "fe_product_t_h": 6.5856313412496865,
+      "fe_tail_t_h": 178.41365041669752,
+      "circulating_load_t_h": 161.0807961347331,
+      "circulating_load_pct": 16.10807961347331,
+      "screen_load_t_h": 248.78202939027028,
+      "crusher_load_t_h": 161.0807961347331,
+      "separator_load_t_h": [
+        166.66666666666666,
+        166.66666666666666,
+        166.66666666666666,
+        166.66666666666666,
+        166.66666666666666,
+        166.66666666666666
+      ],
+      "final_separator_load_t_h": [
+        43.850616627768595,
+        43.850616627768595
+      ],
+      "production_t_day": 219.24019071301498,
+      "production_t_month": 5700.244958538389,
+      "production_t_year": 72349.26293529494,
+      "mass_balance_error_pct": 0.00015796947329818067,
+      "fe_balance_error_pct": 0.0003882389474508297,
+      "warnings": [
+        "Separator capacity = CALIBRATION REQUIRED (no manufacturer/test data)",
+        "GYRATORY capacity = CALIBRATION REQUIRED (no manufacturer data)"
+      ],
+      "scenario_id": "Scenario-006"
+    }
+  ],
+  "feed_sensitivity": [
+    {
+      "parameter": "feed_rate_t_h",
+      "value": 100,
+      "product_t_h": 1.096168660057266,
+      "fe_recovery_pct": 3.5596919159557587,
+      "circulating_load_t_h": 16.10773779764832
+    },
+    {
+      "parameter": "feed_rate_t_h",
+      "value": 200,
+      "product_t_h": 2.192337320114532,
+      "fe_recovery_pct": 3.5596919159557587,
+      "circulating_load_t_h": 32.21547559529664
+    },
+    {
+      "parameter": "feed_rate_t_h",
+      "value": 400,
+      "product_t_h": 4.384718846064525,
+      "fe_recovery_pct": 3.5597291524130754,
+      "circulating_load_t_h": 64.4314190962304
+    },
+    {
+      "parameter": "feed_rate_t_h",
+      "value": 600,
+      "product_t_h": 6.577130876113155,
+      "fe_recovery_pct": 3.5597586947416398,
+      "circulating_load_t_h": 96.64768546631021
+    },
+    {
+      "parameter": "feed_rate_t_h",
+      "value": 800,
+      "product_t_h": 8.769607628418248,
+      "fe_recovery_pct": 3.5598007249588575,
+      "circulating_load_t_h": 128.86463690661319
+    },
+    {
+      "parameter": "feed_rate_t_h",
+      "value": 1000,
+      "product_t_h": 10.962009535650749,
+      "fe_recovery_pct": 3.559800724999831,
+      "circulating_load_t_h": 161.0807961347331
+    }
+  ],
+  "field_sensitivity": [
+    {
+      "field_g": 1400,
+      "product_t_h": 5.0567392380823,
+      "product_fe_pct": 56.38373349307539,
+      "fe_recovery_pct": 2.5686291670631487,
+      "curve_points": 9
+    },
+    {
+      "field_g": 3000,
+      "product_t_h": 8.736838754830915,
+      "product_fe_pct": 63.11318002926913,
+      "fe_recovery_pct": 4.967654749732784,
+      "curve_points": 9
+    },
+    {
+      "field_g": 4000,
+      "product_t_h": 9.869316894942644,
+      "product_fe_pct": 64.17422411094792,
+      "fe_recovery_pct": 5.705907695837963,
+      "curve_points": 9
+    },
+    {
+      "field_g": 5000,
+      "product_t_h": 10.481293115401911,
+      "product_fe_pct": 64.65213016731431,
+      "fe_recovery_pct": 6.104846187556213,
+      "curve_points": 9
+    }
+  ]
+}
