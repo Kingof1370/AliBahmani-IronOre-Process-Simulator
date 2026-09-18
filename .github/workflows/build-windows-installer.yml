@@ -92,16 +92,26 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "pytest failed" }
 
       - name: Launch the installed application (process must stay alive)
-        shell: pwsh
+        shell: bash
         run: |
-          $inst = Join-Path $env:LOCALAPPDATA "AliBahmani\IronOreProcessSimulator"
-          $pyw = Join-Path $inst "runtime\python\pythonw.exe"
-          $env:QT_QPA_PLATFORM = "offscreen"
-          $gui = Start-Process -FilePath $pyw -ArgumentList "`"$inst\app\ahsim_app.py`"" -PassThru
-          Start-Sleep -Seconds 30
-          if ($gui.HasExited) { throw "Application exited immediately (code $($gui.ExitCode)) - launch test FAILED" }
-          Write-Host "Application launch test PASSED - process alive (PID $($gui.Id))"
-          Stop-Process -Id $gui.Id -Force
+          inst="$LOCALAPPDATA/AliBahmani/IronOreProcessSimulator"
+          py="$inst/runtime/python/python.exe"
+          cd "$inst"
+          try_launch () {
+            mode=$1
+            if [ "$mode" = "offscreen" ]; then export QT_QPA_PLATFORM=offscreen; else unset QT_QPA_PLATFORM; fi
+            echo "== launch attempt: platform=$mode, console python.exe, 45s liveness window =="
+            timeout 45 "$py" -X utf8 "$inst/app/ahsim_app.py" > "gui_launch_$mode.log" 2>&1
+            code=$?
+            echo "exit code: $code (124 = still alive after 45s = PASS)"
+            cat "gui_launch_$mode.log" || true
+            if [ "$code" = "124" ]; then
+              echo "LAUNCH TEST PASSED (mode=$mode): application stayed alive for 45 s"
+              return 0
+            fi
+            return 1
+          }
+          try_launch windows || { echo 'native windowed launch did not survive; retrying offscreen with full output'; try_launch offscreen; }
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
