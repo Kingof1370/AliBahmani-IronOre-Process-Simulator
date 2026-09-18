@@ -31,7 +31,10 @@ jobs:
           python -m pip download --only-binary=:all: --platform win_amd64 --python-version "$PYTAG" --implementation cp \
             --dest "$BUILD/wheels" openpyxl ezdxf reportlab pillow numpy imageio imageio-ffmpeg PySide6-Essentials shiboken6 pytest
           ls -1 "$BUILD/wheels"
-          echo "== 3/5 Enabling site-packages in the embeddable runtime =="
+          echo "== 3/5 Pruning PySide6 QML build artifacts (compiler leftovers, not runtime files) to avoid NSIS long-path failures =="
+          find "$SITE" -type d \( -name 'objects-Debug' -o -name 'objects-Release' \) -exec rm -rf {} + 2>/dev/null || true
+          find "$SITE" -type f -name '*.obj' -delete 2>/dev/null || true
+          echo "== 3/5 Enabling site-packages in the embeddable runtime ==""
           printf 'python%s.zip\r\n.\r\nLib\\site-packages\r\nimport site\r\n' "$PYTAG" > "$PAYLOAD/runtime/python/python${PYTAG}._pth"
           SITE="$PAYLOAD/runtime/python/Lib/site-packages"
           mkdir -p "$SITE"
