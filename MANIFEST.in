@@ -1,0 +1,37 @@
+include README.md
+include LICENSE
+include pyproject.toml
+include MANIFEST.in
+
+# Engine + UI + outputs source
+recursive-include ahsim *.py
+recursive-include ahsim *.txt
+recursive-include scripts *.py
+recursive-include tests  *.py
+recursive-include docs   *.md
+
+# Real engineering sample outputs (ship them so `ahsim-make-reports` runs end-to-end out of the box)
+recursive-include RELEASE *.xlsx
+recursive-include RELEASE *.dxf
+recursive-include RELEASE *.mp4
+recursive-include RELEASE *.pdf
+recursive-include RELEASE *.json
+
+# Installer & cross-build scripts (used by CI only, harmless to ship)
+recursive-include installer *.nsi
+recursive-include installer *.iss
+recursive-include installer *.spec
+recursive-include installer *.py
+recursive-include installer *.cmd
+recursive-include installer *.sh
+recursive-include installer *.txt
+
+# Top-level bootstrap
+include Run_AH-SIM.cmd
+include Generate_Reports.cmd
+
+# Make sure __pycache__ never sneaks into the wheel
+global-exclude __pycache__
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd

@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ahsim"
+version = "1.0.0"
+description = "AliBahmani IronOre Process Simulator v1.0.0 - Industrial Mineral Processing Simulation and Engineering Software"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [
+  { name = "Ali Bahmani", email = "ali.bahmani@ah-sim.local" },
+]
+keywords = ["iron-ore", "beneficiation", "magnetic-separation", "process-simulator", "engineering"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+]
+
+dependencies = [
+  "numpy>=1.24,<3.0",
+  "openpyxl>=3.1,<4.0",
+  "ezdxf>=1.1,<2.0",
+  "reportlab>=4.0,<5.0",
+  "Pillow>=10.0,<12.0",
+  "imageio>=2.31,<3.0",
+  "imageio-ffmpeg>=0.4,<0.6",
+]
+
+[project.optional-dependencies]
+gui = ["PySide6>=6.5,<7.0"]
+test = ["pytest>=7.4,<9.0"]
+installer = ["pyinstaller>=6.0,<7.0"]
+
+# Console scripts: ahsim (headless smoke) and ahsim-runsim (GUI or console fallback).
+# Both work identically when launched from the repo root or after a wheel install.
+[project.scripts]
+ahsim          = "ahsim.__main__:cli"
+ahsim-runsim   = "ahsim._cli:main"
+ahsim-make-reports = "ahsim._make_release:main"
+
+[project.urls]
+Homepage = "https://github.com/Kingof1370/AliBahmani-IronOre-Process-Simulator"
+Issues = "https://github.com/Kingof1370/AliBahmani-IronOre-Process-Simulator/issues"
+
+[tool.setuptools]
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.packages.find]
+include = ["ahsim*", "scripts*"]
+exclude = ["tests*", "installer*", "RELEASE*", "docs*"]
+
+[tool.setuptools.package-data]
+"ahsim" = ["py.typed"]
+"ahsim.app" = ["*.py"]
+"ahsim.outputs" = ["*.py"]
+"ahsim.ui" = ["*.py"]
+
+[tool.setuptools.data-files]
+"RELEASE" = ["RELEASE/EXCEL_REPORTS/*.xlsx",
+              "RELEASE/CAD_OUTPUT/*.dxf",
+              "RELEASE/VIDEO_OUTPUT/*.mp4",
+              "RELEASE/SAMPLE_PROJECTS/*.json",
+              "RELEASE/TEST_REPORTS/*"]
+"docs"     = ["docs/*.md"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]

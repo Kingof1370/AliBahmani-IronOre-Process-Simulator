@@ -1,0 +1,4 @@
+[console_scripts]
+ahsim = ahsim.__main__:cli
+ahsim-make-reports = ahsim._make_release:main
+ahsim-runsim = ahsim._cli:main
