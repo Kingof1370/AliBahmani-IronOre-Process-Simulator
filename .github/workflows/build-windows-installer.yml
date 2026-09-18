@@ -32,7 +32,7 @@ jobs:
             --dest "$BUILD/wheels" openpyxl ezdxf reportlab pillow numpy imageio imageio-ffmpeg PySide6-Essentials shiboken6 pytest
           ls -1 "$BUILD/wheels"
           echo "== 3/5 Enabling site-packages in the embeddable runtime =="
-          printf 'python%s.zip\r\n.\r\nLib\\site-packages\r\nimport site\r\n' "$PYTAG" > "$PAYLOAD/runtime/python/python${PYTAG}._pth"
+          printf 'python%s.zip\r\n.\r\nLib\\site-packages\r\n..\\..\\app\r\nimport site\r\n' "$PYTAG" > "$PAYLOAD/runtime/python/python${PYTAG}._pth"
           SITE="$PAYLOAD/runtime/python/Lib/site-packages"
           mkdir -p "$SITE"
           for w in "$BUILD"/wheels/*.whl; do
@@ -96,12 +96,12 @@ jobs:
         run: |
           inst="$LOCALAPPDATA/AliBahmani/IronOreProcessSimulator"
           py="$inst/runtime/python/python.exe"
-          cd "$inst"
+          cd "$inst/app"
           try_launch () {
             mode=$1
             if [ "$mode" = "offscreen" ]; then export QT_QPA_PLATFORM=offscreen; else unset QT_QPA_PLATFORM; fi
             echo "== launch attempt: platform=$mode, console python.exe, 45s liveness window =="
-            timeout 45 "$py" -X utf8 "$inst/app/ahsim_app.py" > "gui_launch_$mode.log" 2>&1
+            timeout 45 "$py" -X utf8 ahsim_app.py > "gui_launch_$mode.log" 2>&1
             code=$?
             echo "exit code: $code (124 = still alive after 45s = PASS)"
             cat "gui_launch_$mode.log" || true
